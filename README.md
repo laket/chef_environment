@@ -1,2 +1,7 @@
 # chef_environment
-chef repository to create my standard development environment for Ubuntu.
+このレポジトリはUbuntuインストール後に開発環境を構築するための、
+レシピを格納するものです。
+
+レシピは必須のベースレシピと開発対象言語で分割予定です。
+
+
