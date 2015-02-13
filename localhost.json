@@ -1,7 +1,12 @@
 {
     "home" : "/home/saket",
     "user" : "saket",
+
+    "rust" : {
+        "src_path" : "/usr/local/src"
+    },
+    
     "run_list" : [
-	"recipe[basetools]"
+	"recipe[rust]"
     ]
 }
