@@ -1,2 +1,5 @@
 file_cache_path "/tmp/chef-solo"
-cookbook_path ["/home/saket/project/chef/chef-repo/cookbooks"]
+
+base = File.expand_path("..", __FILE__)
+
+cookbook_path [base + "/cookbooks", base + "/site-cookbooks"]

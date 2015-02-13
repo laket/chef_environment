@@ -2,6 +2,6 @@
     "home" : "/home/saket",
     "user" : "saket",
     "run_list" : [
-	"recipe[myemacs]"
+	"recipe[basetools]"
     ]
 }
