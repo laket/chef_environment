@@ -17,6 +17,15 @@ ENV['LANGUAGE'] = ENV['LANG'] = ENV['LC_ALL'] = "en_US.UTF-8"
 end
 
 # bashrc
+cookbook_file node.home+"/.screenrc" do 
+  source "screenrc"
+  owner node.user
+  group node.user
+  mode 0644
+end
+
+
+# bashrc
 cookbook_file node.home+"/.bashrc" do 
   source "bashrc"
   owner node.user
