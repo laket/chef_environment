@@ -90,6 +90,11 @@ package "gwenview" do
   action :install
 end
 
+package "python-matplotlib" do
+  action :install
+end
+
+
 # set viewer PATH
 # add environment variable to .bashrc
 bash "add PYLEARN2_VIEWER_COMMAND to .bashrc" do
@@ -100,4 +105,4 @@ bash "add PYLEARN2_VIEWER_COMMAND to .bashrc" do
   EOL
 end
 
-
+  
