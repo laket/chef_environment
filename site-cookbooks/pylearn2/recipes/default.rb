@@ -85,4 +85,19 @@ bash "add PYLEARN2_DATA_PATH to .bashrc" do
   EOL
 end
 
+# setup viewer
+package "gwenview" do
+  action :install
+end
+
+# set viewer PATH
+# add environment variable to .bashrc
+bash "add PYLEARN2_VIEWER_COMMAND to .bashrc" do
+  not_if "grep PYLEARN2_VIEWER_COMMAND #{node.home + "/.bashrc"}"
   
+  code <<-EOL
+    echo "export PYLEARN2_VIEWER_COMMAND=gwenview" >> #{node.home + "/.bashrc"}
+  EOL
+end
+
+
