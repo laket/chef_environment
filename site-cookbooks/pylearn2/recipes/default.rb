@@ -105,4 +105,6 @@ bash "add PYLEARN2_VIEWER_COMMAND to .bashrc" do
   EOL
 end
 
-  
+package "ipython-notebook"   do
+  action :install
+end  

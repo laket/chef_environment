@@ -5,8 +5,12 @@
     "rust" : {
         "src_path" : "/usr/local/src"
     },
+
+    "go" : {
+        "gopath" : "/home/saket/go"
+    },
     
     "run_list" : [
-	"recipe[pylearn2]"
+	"recipe[golang]"
     ]
 }
