@@ -13,8 +13,12 @@
     "intelliJ" : {
         "bin_path" : "/home/saket/bin"
     },
+
+    "pycharm" : {
+        "bin_path" : "/home/saket/bin"
+    },
     
     "run_list" : [
-	"recipe[intellij]"
+	"recipe[pycharm]"
     ]
 }
