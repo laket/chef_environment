@@ -9,8 +9,12 @@
     "go" : {
         "gopath" : "/home/saket/go"
     },
+
+    "intelliJ" : {
+        "bin_path" : "/home/saket/bin"
+    },
     
     "run_list" : [
-	"recipe[golang]"
+	"recipe[intellij]"
     ]
 }
