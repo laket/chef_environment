@@ -35,10 +35,14 @@ end
 # extract files to /srcdir/rustc-nightly
 rustc_srcdir = node.rust.src_path + "/rustc-nightly/src"
 bash "extract rust source files" do
+  not_if {Dir.exist?(rustc_srcdir)}
+  
   code <<-EOL
     install -d #{node.rust.src_path}
     tar zxvf /tmp/#{source_file} -C #{node.rust.src_path}
     chmod 0775 #{node.rust.src_path + "/rustc-nightly"}
+    chown -R #{node.user + "." + node.user} #{rustc_srcdir}
+
   EOL
 end
 
@@ -89,6 +93,37 @@ template emacs_folder + "/rust.el" do
   ) 
 end
 
+#### start for ctag #####
+package "exuberant-ctags" do
+  action :install
+end  
+
+rust_src_path = node.rust.src_path + "/rustc-nightly/src"
+rust_ctag_file_path = rust_src_path + "/etc/ctags.rust"
+
+file node.home + "/.ctags" do
+  owner node.user
+  action :create
+  content IO.read(rust_ctag_file_path)
+end  
+
+directory node.home + "/lib" do
+  owner node.user
+  group node.user
+  action :create
+end  
+
+bash "create TAGS for etag" do
+  not_if {File.exist?(node.home + "/lib/rust.tags")}
+  cwd node.home + "/lib"
+  user node.user
+  code <<-EOL
+    ctags --language=Rust -e -f rust.tags -R #{rust_src_path}
+  EOL
+end
+
+#### end for gtag #####
+
 
 # edit init.el (This requires basetools)
 load_sentence = "(load-file \"~/.emacs.d/rust.el\")"
@@ -98,3 +133,4 @@ bash "edit init.el to load rust.el" do
   not_if "grep '#{load_sentence}' #{init_path}"
   code "echo '#{load_sentence}' >> #{init_path}"
 end
+

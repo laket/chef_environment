@@ -5,4 +5,4 @@
 (setq racer-rust-src-path "<%= @rustc_srcdir  =>")
 (setq racer-cmd "<%= @racer_cmd_path  =>")
 (add-to-list 'load-path "<%= @racer_editors =>")
-(eval-after-load "rust-mode" '(require 'racer))
+;(eval-after-load "rust-mode" '(require 'racer))
