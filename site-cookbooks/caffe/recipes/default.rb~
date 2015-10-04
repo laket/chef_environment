@@ -1,0 +1,49 @@
+#
+# Cookbook Name:: caffe
+# Recipe:: default
+#
+# Copyright 2015, YOUR_COMPANY_NAME
+#
+# All rights reserved - Do Not Redistribute
+#
+
+ENV['LANGUAGE'] = ENV['LANG'] = ENV['LC_ALL'] = "en_US.UTF-8"
+
+# gcc is required
+package "gcc" do
+  action :install
+end
+
+# linux header is required
+bach "install linux header" do
+  code <<-EOL
+      apt-get install linux-headers-$(uname -r)
+  EOL
+end
+
+# remove old driver
+bash "remove nvidia" do
+  only_if "dpkg -l | grep nvidia"  
+  code <<-EOL
+    apt-get --purge remove nvidia-*
+  EOL
+end
+
+# remove old cuda
+bash "remove cuda" do
+  only_if "dpkg -l | grep cuda"  
+  code <<-EOL
+    apt-get --purge remove cuda-*
+  EOL
+end
+
+
+
+bash "install cuda" do
+  code <<-EOC
+    wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
+    dpkg -i cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
+    apt-get update
+    apt-get install cuda
+  EOC
+end  

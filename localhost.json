@@ -1,6 +1,6 @@
 {
-    "home" : "/home/saket",
-    "user" : "saket",
+    "home" : "/home/laket",
+    "user" : "laket",
 
     "rust" : {
         "src_path" : "/usr/local/src"
@@ -17,8 +17,14 @@
     "pycharm" : {
         "bin_path" : "/home/saket/bin"
     },
+
+    "caffe" : {
+        "cuda_path" : "/usr/local/cuda-7.5/",
+        "anaconda_path" : "/usr/local/anaconda",
+        "caffe_path" : "/home/laket/lib/caffe/"
+    },
     
     "run_list" : [
-	"recipe[rust]"
+	    "recipe[caffe]"
     ]
 }
