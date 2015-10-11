@@ -48,6 +48,8 @@ bash "install anaconda" do
   code <<-EOL
     chmod +x /tmp/AnacondaInstaller.sh
     /tmp/AnacondaInstaller.sh -b -f -p #{node.caffe.anaconda_path}
+    update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+    update-alternatives --install /usr/bin/python python #{node.caffe.anaconda_path}/bin/python2.7 2
   EOL
 end
 
