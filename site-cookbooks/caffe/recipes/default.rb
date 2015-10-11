@@ -16,7 +16,7 @@ ruby_block "check nvida & cuda installation" do
   end
 end
 
-%w{libboost-all-dev libgoogle-glog-dev libgflags-dev protobuf-compiler libprotobuf-dev python-protobuf}.each do |pkg|
+%w{libboost-all-dev libgoogle-glog-dev libgflags-dev protobuf-compiler libprotobuf-dev python-protobuf libatlas-dev}.each do |pkg|
   package pkg do
     action :install
   end
@@ -71,10 +71,11 @@ bash "configure Makefile" do
   cwd node.caffe.caffe_path
   
   code <<-EOL
+    mkdir -p ./include/proto
     protoc ./src/caffe/proto/caffe.proto --cpp_out=./include/proto
 
     cp Makefile.config.example Makefile.config
-#    sed -i -e "s/# USE_CUDNN := 1/USE_CUDNN := 1/" Makefile.config
+    sed -i -e "s/# USE_CUDNN := 1/USE_CUDNN := 1/" Makefile.config
     sed -i -e "s!CUDA_DIR := /usr/local/cuda!CUDA_DIR := #{node.caffe.cuda_path}!" Makefile.config
     make -j 2 all
     make test
