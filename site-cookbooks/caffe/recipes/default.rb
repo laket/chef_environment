@@ -72,18 +72,24 @@ bash "install caffe dependencies" do
   EOL
 end
 
-bash "configure Makefile" do
+# get configured Makefile
+cookbook_file node.caffe.cafef_path+"/Makefile.config" do 
+  source "Makefile.config"
+  owner node.user
+  group node.user
+  mode 0644
+end
+
+
+bash "run make" do
   cwd node.caffe.caffe_path
   
   code <<-EOL
     mkdir -p ./include/proto
     protoc ./src/caffe/proto/caffe.proto --cpp_out=./include/proto
 
-    cp Makefile.config.example Makefile.config
-    sed -i -e "s/# USE_CUDNN := 1/USE_CUDNN := 1/" Makefile.config
-    sed -i -e "s!CUDA_DIR := /usr/local/cuda!CUDA_DIR := #{node.caffe.cuda_path}!" Makefile.config
-    make -j 2 all
-    make test
+    make -j 4 all
+    make -j 4 test
     make runtest
   EOL
 end  
