@@ -50,6 +50,9 @@ bash "install anaconda" do
     /tmp/AnacondaInstaller.sh -b -f -p #{node.caffe.anaconda_path}
     update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
     update-alternatives --install /usr/bin/python python #{node.caffe.anaconda_path}/bin/python2.7 2
+
+    echo "export PATH=#{node.caffe.anaconda_path}/bin:$PATH" >> #{node.home} + "/.bashrc"
+    echo "export LD_LIBRARY_PATH=#{node.caffe.anaconda_path}/lib:$LD_LIBRARY_PATH"
   EOL
 end
 
@@ -62,10 +65,10 @@ git node.caffe.caffe_path do
 end  
 
 # install dependencies
-requirement_path = node.caffe.anaconda_path + "/python/requirements.txt"
+requirement_path = node.caffe.caffe_path + "/python/requirements.txt"
 bash "install caffe dependencies" do
-  code <<-EOL
-    for req in $(cat #{requirement_path}); do pip install $req; done
+  code <<-EOL        
+    for req in $(cat #{requirement_path}); do #{node.caffe.anaconda_path}/bin/pip install $req; done
   EOL
 end
 
