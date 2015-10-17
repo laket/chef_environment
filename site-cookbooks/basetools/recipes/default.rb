@@ -56,7 +56,7 @@ directory node.home+"/.emacs.d/" do
 end
 
 # emacs config files
-%w{init.el my-key-bind.el my-cpp.el}.each do |conf_emacs|
+%w{init.el my-key-bind.el my-cpp.el my-python.el}.each do |conf_emacs|
 
   cookbook_file node.home+"/.emacs.d/"+conf_emacs do 
     owner node.user
