@@ -1,6 +1,8 @@
 {
     "home" : "/home/laket",
     "user" : "laket",
+    "python_path" : "/usr/local/anaconda/bin",
+    "anaconda_path" : "/usr/local/anaconda",
 
     "rust" : {
         "src_path" : "/usr/local/src"
@@ -20,11 +22,10 @@
 
     "caffe" : {
         "cuda_path" : "/usr/local/cuda-7.5/",
-        "anaconda_path" : "/usr/local/anaconda",
         "caffe_path" : "/home/laket/lib/caffe/"
     },
     
     "run_list" : [
-	    "recipe[caffe]"
+	    "recipe[kivy]"
     ]
 }
